@@ -1,24 +1,29 @@
 <div class="container">
 
 	<div class="row">
-		<div class="col-12">
+		<div class="col-6 offset-3">
 			<form>
 				<div class="form-group">
-					<input class="form-control" id="message-title" type="text" placeholder="Title">
+					<input class="form-control" id="name" ng-model="message.name" type="text" placeholder="Name">
+				</div>			
+				<div class="form-group">
+					<input class="form-control" id="message-title" ng-model="message.title" type="text" placeholder="Title">
 				</div>
 				<div class="form-group">
-					<input class="form-control" id="message-content" type="text" placeholder="Message">
+					<input class="form-control" id="message-content" ng-model="message.content" type="text" placeholder="Message">
 				</div>
-				<button class="btn btn-primary" type="button">Submit Message</button>
+				<button class="btn btn-primary" ng-click="submitMessage(message)" type="button">Submit Message</button>
 			</form>
 		</div>
 	</div>
 
 	<div class="row">
-	  <ul>
+	  <ul id="message-list">
 	    <li ng-repeat="message in messages">
-	      <span>{{message.title}}</span>
-	      <p>{{message.content}}</p>
+	    	<div>Message</div>
+	    	<div>Name: {{message.name}}</div>
+	      <div>Title: {{message.title}}</div>
+	      <p>Message: {{message.content}}</p>
 	    </li>
 	  </ul>
 	</div>

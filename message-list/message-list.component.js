@@ -3,30 +3,27 @@ angular.
   module('messageList').
   component('messageList', {
     templateUrl: 'message-list/message-list.template.html',
-    controller: function MessageListController() {
-      this.messages = [
-        {
-          name: 'Nexus S',
-          snippet: 'Fast just got faster with Nexus S.'
-        }, {
-          name: 'Motorola XOOM™ with Wi-Fi',
-          snippet: 'The Next, Next Generation tablet.'
-        }, {
-          name: 'MOTOROLA XOOM™',
-          snippet: 'The Next, Next Generation tablet.'
-        }
-      ];
+    controller: function MessageListController($scope) {
+
+      $scope.messages = []
 
       messagesRef = firebase.database().ref('messages/');
       messagesRef.on('value', function(snapshot) {
-        this.messages = snapshot.val();
+        if(snapshot.val()) {
+          $scope.messages = snapshot.val();
+        }
       });
 
-      this.submitMessage = function(name, title, content) {
+      $scope.submitMessage = function(message) {
+        //console.log(message);
+
+        if(!message || !message.name || !message.title || !message.content)
+          return
+        //console.log($scope.messages.length);
         firebase.database().ref('messages/' + $scope.messages.length).set({
-          name: name,
-          title: title,
-          content : content
+          name: message.name,
+          title: message.title,
+          content : message.content
         });
       };
     }
