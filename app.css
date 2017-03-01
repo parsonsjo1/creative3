@@ -8,5 +8,16 @@ form {
 }
 
 form button {
+	width: 70%;
+	}
+
+.message{
+    border-bottom: 1px solid;
 	width: 100%;
+	margin-top:20px;
+}
+
+#but{
+	text-align:center;
+margin:auto;
 }
